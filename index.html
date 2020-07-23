@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIF SPLITTER</title>
+    <link rel="stylesheet" href="assets/styles/site.css">
+</head>
+
+<body ontouchstart>
+
+    <div id="app">
+        <foo-gif v-if="step==0"></foo-gif>
+        <foo-pic :images="images" v-if="step==1"></foo-pic>
+        <foo-video :blob="blob" v-if="step==2"></foo-video>
+    </div>
+
+    <!-- gif template step:0 -->
+    <script type="text/x-template" id="gif-template">
+        <section>
+            <div @click="$refs.file.click()" class="flex-gif">
+                <input class="flex-file" type="file" ref="file" @change.prevent.stop="onSelect">
+                <img ref="gif" alt="">
+            </div>
+            <div class="flex-btn">
+                <button @click="onSplitter">拆分GIF</button>
+                <!-- <button @click="onReset">重置</button> -->
+            </div>
+        </section>
+    </script>
+
+    <!-- pic template step:1 -->
+    <script type="text/x-template" id="pic-template">
+        <section>
+            <div class="flex-box">
+                <div v-for="img in images" class="flex-img">
+                    <img :src="img" alt="" sizes="" srcset="">
+                </div>
+            </div>
+            <div class="flex-btn">
+                <button @click="onCompile">合成视频</button>
+            </div>
+        </section>
+    </script>
+
+    <!-- video template step:2 -->
+    <script type="text/x-template" id="video-template">
+        <section>
+            <video ref="awesome" :src="blob" width="100%" height="auto" controls autoplay loop></video>
+            <div class="flex-btn">
+                <button @click="onBack">再来一个</button>
+            </div>
+        </section>
+    </script>
+
+    <script src="assets/vendor/vue/vue.min.js"></script>
+    <script src="assets/vendor/lib/libgif.js"></script>
+    <script src="assets/vendor/lib/whammy.js"></script>
+    <script src="assets/scripts/main.js"></script>
+</body>
+
+</html>
