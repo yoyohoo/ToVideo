@@ -1,0 +1,103 @@
+html, body{
+    background-color: #fff;
+}
+body{
+    font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
+}
+
+/*fix fastclick很难点中的bug*/
+label > * { pointer-events: none; }
+
+
+.flex-file {
+    width: 0;
+    height: 0;
+    display: none;
+}
+
+.flex-gif {
+    margin: 2rem .5rem;
+    position: relative;
+    border-radius: .5rem;
+    min-height: 12rem;
+    text-align: center;
+    background-color: #f8f8f8;
+}
+
+.flex-gif::after {
+    content: "";
+    background-image: url('../images/plus.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 3rem 3rem;
+    opacity: 0.1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: 1;  
+}
+
+.flex-gif span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -1rem;
+    margin-left: -3rem;
+    font-size: .95rem;
+    color: #ccc;
+}
+
+.flex-img img,
+.flex-gif img {
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+.flex-box {
+    margin: 1rem auto;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space;
+}
+
+.flex-img {
+    width: 30%;
+    margin: 1%;
+    border-radius: .25rem;
+    box-shadow: 1px 1px 1px 1px #eee;
+}
+
+.flex-btn {
+    margin: 1rem auto;
+    text-align: center;
+}
+
+.flex-btn button {
+    border: none;
+    position: relative;
+    display: inline-block;
+    width: calc(100% - 1rem);
+    margin-left: auto;
+    margin-right: auto;
+    padding: 8px 24px;
+    box-sizing: border-box;
+    font-weight: 700;
+    font-size: 17px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #07c160;
+    line-height: 1.41176471;
+    border-radius: 4px;
+    overflow: hidden;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.jsgif {
+    display: none;
+}
+
