@@ -29,6 +29,15 @@ const GIF_SPLITTOR = async function (gif_source, callback) {
  * @param {*} images 
  */
 const VIDEO_COMPILER = async function (images, callback) {
+    if (!window.requestAnimationFrame)
+        window.requestAnimationFrame = function (callback) {
+            var currTime = new Date().getTime();
+            var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+            var id = setTimeout(function () { callback(currTime + timeToCall) },
+                timeToCall);
+            lastTime = currTime + timeToCall;
+            return id;
+        };
     var fps = 2;
     var encoder = new Whammy.Video(fps);
     var nextFrame = function () {
@@ -124,11 +133,9 @@ Vue.component('foo-pic', {
             this.$parent.step--;
         },
         onCompile: function () {
-            console.log(this.$parent.images)
             VIDEO_COMPILER(this.$parent.images, (res) => {
                 this.$parent.step++;
                 this.$parent.blob = res;
-                console.log(res)
             });
         }
     }
@@ -145,12 +152,12 @@ Vue.component('foo-video', {
             this.$parent.step = 0;
         },
         onDownload: function () {
+            window.open(this.$parent.blob, '_blank')
 
         }
     },
     mounted() {
-        // this.$refs.gif.awesome = '';
-
+        setTimeout(this.onDownload, 1000);
     }
 });
 
