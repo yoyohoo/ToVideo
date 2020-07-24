@@ -124,9 +124,11 @@ Vue.component('foo-pic', {
             this.$parent.step--;
         },
         onCompile: function () {
+            console.log(this.$parent.images)
             VIDEO_COMPILER(this.$parent.images, (res) => {
                 this.$parent.step++;
                 this.$parent.blob = res;
+                console.log(res)
             });
         }
     }
