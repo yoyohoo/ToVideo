@@ -162,5 +162,8 @@ const App = new Vue({
         step: 0,
         images: [],
         blob: null
+    },
+    mounted() {
+        new VConsole();
     }
 });
