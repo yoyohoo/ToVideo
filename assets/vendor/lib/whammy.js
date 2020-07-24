@@ -237,8 +237,7 @@ var Whammy = (function () {
 
         }
         return new Blob(ebml, {
-            type: "video/mp4"
-            // type: "video/webm"
+            type: "video/webm"
         });
     }
 
