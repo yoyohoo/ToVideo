@@ -43,12 +43,15 @@ const GIF_SPLITTOR = async function (gif_source, callback) {
 const VIDEO_COMPILER = async function (images, callback) {
     var fps = 2;
     var encoder = new Whammy.Video(fps);
+    var next = function (callback) {
+        window.setTimeout(callback, 100);
+    };
     var nextFrame = function () {
         encoder.add(contexts.shift());
         if (contexts.length) {
-            requestAnimationFrame(nextFrame);
+            next(nextFrame);
         } else {
-            requestAnimationFrame(done);
+            next(done);
         }
     }
 
