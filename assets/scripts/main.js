@@ -1,6 +1,18 @@
 "use strict"
 
 /**
+ * requestAnimFrame
+ */
+window.requestAnimFrame = (function () {
+    return window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        function (callback) {
+            window.setTimeout(callback, 1000 / 60);
+        };
+})();
+
+/**
  * GIF SPLITTOR
  * @param {*} gif_source source file
  * @param {*} callback 
@@ -29,15 +41,6 @@ const GIF_SPLITTOR = async function (gif_source, callback) {
  * @param {*} images 
  */
 const VIDEO_COMPILER = async function (images, callback) {
-    if (!window.requestAnimationFrame)
-        window.requestAnimationFrame = function (callback) {
-            var currTime = new Date().getTime();
-            var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-            var id = setTimeout(function () { callback(currTime + timeToCall) },
-                timeToCall);
-            lastTime = currTime + timeToCall;
-            return id;
-        };
     var fps = 2;
     var encoder = new Whammy.Video(fps);
     var nextFrame = function () {
