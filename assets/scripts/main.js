@@ -80,11 +80,11 @@ const VIDEO_COMPILER = async function (images, callback) {
             canvas.width = this.width;
             canvas.height = this.height;
             ctx.drawImage(img, 0, 0);
+            console.log(ctx)
             contexts.push(ctx);
             idx++;
             if (idx + 1 == len) {
-                console.log(encoder)
-                nextFrame();
+                setTimeout(nextFrame, 1000);
             }
         }
         img.src = image;
